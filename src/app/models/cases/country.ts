@@ -1,6 +1,7 @@
-export interface CasesResponse {
+export interface ICases {
   [key: string]: ICountry;
 }
+
 
 export interface ICountry {
   All: ICountryStateAll;
