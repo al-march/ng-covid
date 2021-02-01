@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Config } from '@app/core/config/config';
 import { HttpClient } from '@angular/common/http';
-import { ICases } from '@app/models/cases/country';
-import { Observable } from 'rxjs';
+import { ICases, ICountry } from '@app/models/cases/country';
+import { Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { tap } from 'rxjs/operators';
 import { retrievedCasesList } from '@app/store/cases/cases.actions';
@@ -12,6 +12,8 @@ import { retrievedCasesList } from '@app/store/cases/cases.actions';
 })
 export class ApiService {
 
+  private allCases: ICases;
+
   constructor(
     private config: Config,
     private http: HttpClient,
@@ -20,8 +22,19 @@ export class ApiService {
   }
 
   public getAllCases(): Observable<ICases> {
-    return this.http.get<ICases>(this.config.host + 'cases').pipe(
-      tap(casesList => this.store.dispatch(retrievedCasesList({casesList})))
+    const getFromApi = () => this.http.get<ICases>(this.config.host + 'cases').pipe(
+      tap(casesList => {
+        this.store.dispatch(retrievedCasesList({casesList}));
+        this.allCases = casesList;
+      })
     );
+
+    return this.allCases
+      ? of(this.allCases)
+      : getFromApi();
+  }
+
+  public getCountryCases(country: string): Observable<ICountry> {
+    return this.http.get<ICountry>(`${this.config.host}cases?country=${country}`);
   }
 }
