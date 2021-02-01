@@ -13,6 +13,7 @@ import { retrievedCasesList } from '@app/store/cases/cases.actions';
 export class ApiService {
 
   private allCases: ICases;
+  private countryCases: { [key: string]: ICountry } = {};
 
   constructor(
     private config: Config,
@@ -35,6 +36,14 @@ export class ApiService {
   }
 
   public getCountryCases(country: string): Observable<ICountry> {
-    return this.http.get<ICountry>(`${this.config.host}cases?country=${country}`);
+    const getFromApi = () => this.http.get<ICountry>(`${this.config.host}cases?country=${country}`).pipe(
+      tap(cases => {
+        this.countryCases[country] = cases;
+      })
+    );
+
+    return this.countryCases[country]
+      ? of(this.countryCases[country])
+      : getFromApi();
   }
 }
