@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MainModule } from '@app/pages/main/main.module';
+import { PageCountryModule } from '@app/pages/page-country/page-country.module';
 
 @NgModule({
   declarations: [
@@ -21,8 +22,10 @@ import { MainModule } from '@app/pages/main/main.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     MainModule,
+    PageCountryModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
