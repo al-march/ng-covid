@@ -2,12 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '@app/services/api.service';
 import { select, Store } from '@ngrx/store';
 import { selectCases } from '@app/store/cases/cases.selectors';
-import { ICases, ICountryStateAll } from '@app/models/cases/country';
-import { tap } from 'rxjs/operators';
+import { ICountryStateAll } from '@app/models/cases/country';
+import { map } from 'rxjs/operators';
 
-interface Country {
+interface ICountry {
   name: string;
   state: ICountryStateAll;
+}
+
+class Country implements ICountry {
+  constructor(
+    public name: string,
+    public state: ICountryStateAll
+  ) {
+  }
 }
 
 @Component({
@@ -17,20 +25,13 @@ interface Country {
 })
 export class MainComponent implements OnInit {
 
-  cases$ = this.store.pipe(select(selectCases)).pipe(
-    tap(list => {
-      this.casesCash = list;
-      this.countriesList = Object.entries(list).map(([countryName, countryState]) => {
-        return {
-          name: countryName,
-          state: countryState.All
-        };
-      });
-    })
+  public cases$ = this.store.pipe(select(selectCases)).pipe(
+    map(list => Object.entries(list)
+      .map(([countryName, countryState]) => (
+        new Country(countryName, countryState.All))
+      )
+    )
   );
-
-  casesCash: ICases = null;
-  countriesList: Country[] = [];
 
   constructor(
     private api: ApiService,

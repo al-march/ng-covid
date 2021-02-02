@@ -1,8 +1,8 @@
 <div class="container">
   <h2>Countries: </h2>
-  <div class="country-wrapper" *ngIf="cases$ | async">
+  <div class="country-wrapper" *ngIf="cases$ | async as cases">
     <div class="country-item"
-         *ngFor="let country of countriesList"
+         *ngFor="let country of cases"
          [routerLink]="['country']"
          [queryParams]="{name: country.name}"
     >
