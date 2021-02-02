@@ -1,14 +1,15 @@
-<h2>Countries: </h2>
-
-<div class="country-wrapper" *ngIf="cases$ | async">
-  <div class="country-item"
-       *ngFor="let country of countriesList"
-       [routerLink]="['country']"
-       [queryParams]="{name: country.name}"
-  >
-    <h3>{{country.name}}</h3>
-    <p>population: {{country.state.population}}</p>
-    <p>confirmed: {{country.state.confirmed}}</p>
-    <p>deaths: {{country.state.deaths}}</p>
+<div class="container">
+  <h2>Countries: </h2>
+  <div class="country-wrapper" *ngIf="cases$ | async">
+    <div class="country-item"
+         *ngFor="let country of countriesList"
+         [routerLink]="['country']"
+         [queryParams]="{name: country.name}"
+    >
+      <h3>{{country.name}}</h3>
+      <p>population: {{country.state.population}}</p>
+      <p>confirmed: {{country.state.confirmed}}</p>
+      <p>deaths: {{country.state.deaths}}</p>
+    </div>
   </div>
 </div>
