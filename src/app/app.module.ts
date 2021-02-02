@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MainModule } from '@app/pages/main/main.module';
 import { PageCountryModule } from '@app/pages/page-country/page-country.module';
+import { TemplateModule } from '@app/core/template/template.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { PageCountryModule } from '@app/pages/page-country/page-country.module';
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    TemplateModule,
     MainModule,
     PageCountryModule
   ],
