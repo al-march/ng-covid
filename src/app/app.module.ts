@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MainModule } from '@app/pages/main/main.module';
 import { PageCountryModule } from '@app/pages/page-country/page-country.module';
 import { TemplateModule } from '@app/core/template/template.module';
+import { ApiService } from '@app/services/api.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,13 @@ import { TemplateModule } from '@app/core/template/template.module';
     MainModule,
     PageCountryModule
   ],
-  providers: [],
+  providers: [
+    { provide: APP_INITIALIZER,
+      useFactory: (api: ApiService) => () => api.getAllCases().toPromise(),
+      deps: [ApiService],
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

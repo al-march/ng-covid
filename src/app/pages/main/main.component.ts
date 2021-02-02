@@ -39,9 +39,6 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.casesCash) {
-      this.api.getAllCases().subscribe();
-    }
   }
 
   parseCases() {
