@@ -7,6 +7,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MainComponent } from './main.component';
 import { StoreModule } from '@ngrx/store';
 import { casesReducer } from '@app/store/cases/cases.reducer';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { casesReducer } from '@app/store/cases/cases.reducer';
 
     StoreModule.forRoot({
       casesList: casesReducer
-    })
+    }),
+    MatSortModule
   ]
 })
 export class MainModule {
