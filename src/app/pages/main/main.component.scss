@@ -3,17 +3,13 @@
   margin: 0 auto;
 }
 
-.country {
-  &-wrapper {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 20px;
-    justify-content: center;
+.table {
+  &-container {
+    height: 100%;
+    overflow: auto;
   }
+}
 
-  &-item {
-    padding: 20px;
-    border: 1px solid #dedede;
-    cursor: pointer;
-  }
+table {
+  width: 100%;
 }

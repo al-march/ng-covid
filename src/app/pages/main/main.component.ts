@@ -25,6 +25,9 @@ class Country implements ICountry {
 })
 export class MainComponent implements OnInit {
 
+  public displayedColumns: string[] = ['name', 'population', 'confirmed', 'deaths'];
+  public dataSource: ICountry[];
+
   public cases$ = this.store.pipe(select(selectCases)).pipe(
     map(list => Object.entries(list)
       .map(([countryName, countryState]) => (
@@ -40,6 +43,9 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.cases$.subscribe(countries => {
+      this.dataSource = countries
+    })
   }
 
   parseCases() {
