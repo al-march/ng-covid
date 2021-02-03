@@ -1,6 +1,11 @@
 <div class="container">
   <h2>Countries: </h2>
 
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput autocomplete="off" (keyup)="applyFilter($event)" placeholder="Ex. Germany">
+  </mat-form-field>
+
   <div class="table-container mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
 

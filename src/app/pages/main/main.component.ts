@@ -46,4 +46,9 @@ export class MainComponent implements OnInit, AfterViewInit {
 
   parseCases() {
   }
+
+  applyFilter($event: KeyboardEvent) {
+    const filterValue = ($event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }
