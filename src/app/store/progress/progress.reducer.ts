@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { actionProgress } from '@app/store/progress/progress.actions';
 
-const initialProgress: any = null
+const initialProgress: boolean = false
 
 export const progressReducer = createReducer(
   initialProgress,

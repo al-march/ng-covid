@@ -11,6 +11,11 @@ import { MainModule } from '@app/pages/main/main.module';
 import { PageCountryModule } from '@app/pages/page-country/page-country.module';
 import { TemplateModule } from '@app/core/template/template.module';
 import { ApiService } from '@app/services/api.service';
+import { StoreModule } from '@ngrx/store';
+import { progressReducer } from '@app/store/progress/progress.reducer';
+import { casesReducer } from '@app/store/cases/cases.reducer';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
 
 @NgModule({
   declarations: [
@@ -25,10 +30,16 @@ import { ApiService } from '@app/services/api.service';
     BrowserAnimationsModule,
     TemplateModule,
     MainModule,
-    PageCountryModule
+    PageCountryModule,
+    StoreModule.forRoot({
+      isLoading: progressReducer,
+      casesList: casesReducer
+    }),
+    MatProgressBarModule
   ],
   providers: [
-    { provide: APP_INITIALIZER,
+    {
+      provide: APP_INITIALIZER,
       useFactory: (api: ApiService) => () => api.getAllCases().toPromise(),
       deps: [ApiService],
       multi: true
