@@ -1,4 +1,4 @@
-<div class="country" *ngIf="cases">
+<div class="country" *ngIf="(countryCases$ | async) as cases">
   <h3>{{countryName}}</h3>
 
   <p>population: {{cases.All.population}}</p>

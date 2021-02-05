@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { ICountry } from '@app/models/cases/country';
 import { ApiService } from '@app/services/api.service';
+import { select, Store } from '@ngrx/store';
+import { selectCases } from '@app/store/cases/cases.selectors';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-page-country',
@@ -11,28 +14,27 @@ import { ApiService } from '@app/services/api.service';
 })
 export class PageCountryComponent implements OnInit {
 
-  cases: ICountry;
-  countryName: string;
+  public countryName: string;
+  public countryCases$: Observable<ICountry>;
+
+  private cases$ = this.store.pipe(select(selectCases));
 
   constructor(
     private route: ActivatedRoute,
-    private api: ApiService
+    private api: ApiService,
+    private store: Store
   ) {
   }
 
   ngOnInit(): void {
-    this.route.queryParams
-      .pipe(map(params => params.name))
-      .subscribe(countryName => {
-        this.countryName = countryName;
-        this.getCountryCases(countryName);
-      });
-  }
-
-  getCountryCases(country: string) {
-    this.api.getCountryCases(country).subscribe(cases => {
-      this.cases = cases;
-      console.log(cases);
-    });
+    this.countryCases$ = this.route.queryParams.pipe(
+      map(params => params.name),
+      switchMap(country => {
+        this.countryName = country;
+        return this.cases$.pipe(
+          map(cases => cases[country])
+        );
+      })
+    );
   }
 }
