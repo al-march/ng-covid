@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { CountryFlagModule } from '@app/shared/components/country-flag/country-flag.module';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 
@@ -25,7 +26,8 @@ import { CountryFlagModule } from '@app/shared/components/country-flag/country-f
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
-    CountryFlagModule
+    CountryFlagModule,
+    MatPaginatorModule
   ]
 })
 export class MainModule {
