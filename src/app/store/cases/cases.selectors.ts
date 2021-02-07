@@ -1,8 +1,14 @@
-import { createSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { CasesState } from '@app/store/cases/cases.state';
-import { ICases } from '@app/models/cases/country';
+
+export const getCasesState = createFeatureSelector<CasesState>('cases');
 
 export const selectCases = createSelector(
-  (state: CasesState) => state.casesList,
-  (casesList: ICases) => casesList
+  getCasesState,
+  (state: CasesState) => state?.casesList,
+);
+
+export const selectContinentsCases = createSelector(
+  getCasesState,
+  (state: CasesState) => state?.countriesCases,
 );
