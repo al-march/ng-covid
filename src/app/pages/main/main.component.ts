@@ -26,7 +26,8 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   public cases$ = this.store.pipe(select(selectCases)).pipe(
     map(list => Object.values(list)
       .filter(item => item.All.country)
-      .map(state => state.All))
+      .map(state => state.All)
+    )
   );
 
   private destroy$ = new Subject();
@@ -48,9 +49,6 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-  }
-
-  parseCases() {
   }
 
   applyFilter($event: KeyboardEvent) {
