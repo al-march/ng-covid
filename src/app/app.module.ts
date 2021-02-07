@@ -32,8 +32,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MainModule,
     PageCountryModule,
     StoreModule.forRoot({
-      isLoading: progressReducer,
-      casesList: casesReducer
+      'cases': casesReducer,
+      isLoading: progressReducer
     }),
     MatProgressBarModule
   ],
