@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Config } from '@app/core/config/config';
 import { HttpClient } from '@angular/common/http';
-import { ICases, ICountry, ICountryStateAll } from '@app/models/cases/country';
+import { ICases, ICountry } from '@app/models/cases/country';
 import { Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { tap } from 'rxjs/operators';
-import { retrievedCasesByContinents, retrievedCasesList } from '@app/store/cases/cases.actions';
-import { IRegionsCases } from '@app/store/cases/cases.state';
+import { retrievedCasesList } from '@app/store/cases/cases.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +26,6 @@ export class ApiService {
     const getFromApi = () => this.http.get<ICases>(this.config.host + 'cases').pipe(
       tap(casesList => {
         this.store.dispatch(retrievedCasesList({casesList}));
-        this.store.dispatch(retrievedCasesByContinents({countriesCases: this.parseCases(casesList)}));
         this.allCases = casesList;
       })
     );
@@ -35,24 +33,6 @@ export class ApiService {
     return this.allCases
       ? of(this.allCases)
       : getFromApi();
-  }
-
-  parseCases(cases: ICases): IRegionsCases {
-    const continents: IRegionsCases = new Map<string, ICountryStateAll[]>();
-
-    Object.values(cases)
-      .filter(item => item.All.country)
-      .map(state => state.All)
-      .forEach(country => {
-        const continent = country.continent || 'other';
-        if (continents.get(continent)) {
-          continents.get(continent).push(country);
-        } else {
-          continents.set(continent, [country]);
-        }
-      });
-
-    return continents;
   }
 
   public getCountryCases(country: string): Observable<ICountry> {
