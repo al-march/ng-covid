@@ -10,5 +10,5 @@ export const selectCases = createSelector(
 
 export const selectContinentsCases = createSelector(
   getCasesState,
-  (state: CasesState) => state?.countriesCases,
+  (state: CasesState) => state?.regionCases,
 );
