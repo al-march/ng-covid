@@ -1,7 +1,7 @@
 <div class="container">
 
   <h2>World</h2>
-  <div *ngFor="let continent of (continents$ | async) | keyvalue">
+  <div *ngFor="let continent of (regions$ | async) | keyvalue">
     {{continent.key}}: {{continent.value.confirmed | number}}
   </div>
   <hr>

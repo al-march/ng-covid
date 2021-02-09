@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '@app/services/api.service';
 import { select, Store } from '@ngrx/store';
-import { selectCases, selectContinentsCases } from '@app/store/cases/cases.selectors';
+import { selectCases, selectRegionsCases } from '@app/store/cases/cases.selectors';
 import { map, takeUntil, tap } from 'rxjs/operators';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -30,7 +30,7 @@ export class MainComponent implements OnInit, AfterViewInit, OnDestroy {
     )
   );
 
-  public continents$ = this.store.pipe(select(selectContinentsCases));
+  public regions$ = this.store.pipe(select(selectRegionsCases));
 
   private destroy$ = new Subject();
 

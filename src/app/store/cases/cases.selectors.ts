@@ -8,7 +8,7 @@ export const selectCases = createSelector(
   (state: CasesState) => state?.casesList,
 );
 
-export const selectContinentsCases = createSelector(
+export const selectRegionsCases = createSelector(
   getCasesState,
   (state: CasesState) => state?.regionCases,
 );
