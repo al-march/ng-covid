@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular
 import { ApiService } from '@app/services/api.service';
 import { select, Store } from '@ngrx/store';
 import { selectCases, selectRegionsCases } from '@app/store/cases/cases.selectors';
-import { map, takeUntil, tap } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ICountryStateAll } from '@app/models/cases/country';
