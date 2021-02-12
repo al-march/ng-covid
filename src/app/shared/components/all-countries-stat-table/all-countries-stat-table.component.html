@@ -1,0 +1,48 @@
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input matInput autocomplete="off" (keyup)="applyFilter($event)" placeholder="Ex. Germany">
+</mat-form-field>
+
+<div class="table-container mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- Country Column -->
+    <ng-container matColumnDef="country">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Country</th>
+      <td mat-cell *matCellDef="let item">
+        <app-country-flag [iso]="item.abbreviation"></app-country-flag>
+        {{item.country}} </td>
+    </ng-container>
+
+    <!-- Population Column -->
+    <ng-container matColumnDef="population">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Population</th>
+      <td mat-cell *matCellDef="let item"> {{item.population | number}} </td>
+    </ng-container>
+
+    <!-- Confirmed Column -->
+    <ng-container matColumnDef="confirmed">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Confirmed</th>
+      <td mat-cell *matCellDef="let item"> {{item.confirmed | number}} </td>
+    </ng-container>
+
+    <!-- Deaths Column -->
+    <ng-container matColumnDef="deaths">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Deaths</th>
+      <td mat-cell *matCellDef="let item"> {{item.deaths | number}} </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let item">
+        <a href="" mat-button [routerLink]="['/country']" [queryParams]="{name: item.country}">More</a>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="pagination"></mat-paginator>
+</div>
