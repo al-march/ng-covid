@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { selectProgress } from '@app/store/progress/progress.selectors';
+import { selectDrawer } from '@app/store/drawer/drawer.selectors';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ export class AppComponent implements AfterViewInit {
   public headerHeight = '0px';
 
   public isLoading$ = this.store.pipe(select(selectProgress));
+  public drawerState$ = this.store.pipe(select(selectDrawer))
 
   constructor(
     private store: Store
