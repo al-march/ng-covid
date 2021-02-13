@@ -1,11 +1,24 @@
 .header {
   position: sticky;
   top: 0;
+  z-index: 10;
 
   mat-progress-bar {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
+  }
+}
+
+.drawer {
+  padding: 2rem;
+
+  &-container {
+    height: 100%;
+  }
+
+  &-content {
+    padding: 10px 30px;
   }
 }

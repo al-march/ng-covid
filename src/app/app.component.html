@@ -1,9 +1,13 @@
-<main class="main">
-  <div class="header">
-    <app-header></app-header>
-    <mat-progress-bar mode="indeterminate" *ngIf="isLoading$ | async"></mat-progress-bar>
-  </div>
+<div class="header" #header>
+  <app-header></app-header>
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading$ | async"></mat-progress-bar>
+</div>
 
-  <router-outlet></router-outlet>
-</main>
-
+<mat-drawer-container class="drawer-container" [style.height]="headerHeight">
+  <mat-drawer class="drawer" mode="side" opened>Drawer content</mat-drawer>
+  <mat-drawer-content class="drawer-content">
+    <main class="main">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-drawer-content>
+</mat-drawer-container>

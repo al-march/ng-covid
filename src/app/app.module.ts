@@ -15,6 +15,7 @@ import { StoreModule } from '@ngrx/store';
 import { progressReducer } from '@app/store/progress/progress.reducer';
 import { casesReducer } from '@app/store/cases/cases.reducer';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
       'cases': casesReducer,
       isLoading: progressReducer
     }),
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSidenavModule
   ],
   providers: [
     {
