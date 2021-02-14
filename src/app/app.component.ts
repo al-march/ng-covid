@@ -3,6 +3,7 @@ import { select, Store } from '@ngrx/store';
 import { selectProgress } from '@app/store/progress/progress.selectors';
 import { selectDrawer } from '@app/store/drawer/drawer.selectors';
 import { actionDrawer } from '@app/store/drawer/drawer.actions';
+import { getStoreValue } from '@app/store/store.helpers';
 
 @Component({
   selector: 'app-root',
@@ -30,6 +31,15 @@ export class AppComponent implements AfterViewInit {
   }
 
   closeSidebar() {
-    this.store.dispatch(actionDrawer({isActive: false}));
+    this.dispatchSidebar(false);
+  }
+
+  async toggleSidebar() {
+    const {isActive} = await getStoreValue(this.drawerState$);
+    this.dispatchSidebar(!isActive);
+  }
+
+  dispatchSidebar(isActive: boolean) {
+    this.store.dispatch(actionDrawer({isActive}));
   }
 }
