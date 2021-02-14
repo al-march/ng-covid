@@ -1,6 +1,10 @@
 <mat-toolbar>
   Covid
 
+  <button mat-icon-button (click)="onToggleSidebar.emit()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
   <menu class="menu">
     <a routerLink="/" mat-button>All Countries</a>
   </menu>
