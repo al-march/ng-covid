@@ -9,7 +9,7 @@
     mode="side"
     [opened]="(drawerState$ | async).isActive"
   >
-    <app-sidebar (onClose)="closeSidebar()"></app-sidebar>
+    <app-sidebar (onClose)="toggleSidebar()"></app-sidebar>
   </mat-drawer>
   <mat-drawer-content class="drawer-content">
     <main class="main">

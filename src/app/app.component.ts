@@ -30,16 +30,12 @@ export class AppComponent implements AfterViewInit {
     });
   }
 
-  closeSidebar() {
-    this.dispatchSidebar(false);
-  }
-
-  async toggleSidebar() {
+  public async toggleSidebar() {
     const {isActive} = await getStoreValue(this.drawerState$);
     this.dispatchSidebar(!isActive);
   }
 
-  dispatchSidebar(isActive: boolean) {
+  private dispatchSidebar(isActive: boolean) {
     this.store.dispatch(actionDrawer({isActive}));
   }
 }
