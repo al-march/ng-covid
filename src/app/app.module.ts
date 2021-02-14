@@ -17,6 +17,7 @@ import { casesReducer } from '@app/store/cases/cases.reducer';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { drawerReducer } from '@app/store/drawer/drawer.reducer';
+import { SidebarModule } from '@app/core/template/sidebar/sidebar.module';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { drawerReducer } from '@app/store/drawer/drawer.reducer';
       isLoading: progressReducer
     }),
     MatProgressBarModule,
-    MatSidenavModule
+    MatSidenavModule,
+    SidebarModule
   ],
   providers: [
     {

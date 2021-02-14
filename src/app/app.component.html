@@ -4,7 +4,13 @@
 </div>
 
 <mat-drawer-container class="drawer-container" [style.height]="headerHeight">
-  <mat-drawer class="drawer" mode="side" [opened]="(drawerState$ | async).isActive">Drawer content</mat-drawer>
+  <mat-drawer
+    class="drawer"
+    mode="side"
+    [opened]="(drawerState$ | async).isActive"
+  >
+    <app-sidebar (onClose)="closeSidebar()"></app-sidebar>
+  </mat-drawer>
   <mat-drawer-content class="drawer-content">
     <main class="main">
       <router-outlet></router-outlet>
