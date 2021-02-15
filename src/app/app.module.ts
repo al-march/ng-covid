@@ -19,6 +19,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { drawerReducer } from '@app/store/drawer/drawer.reducer';
 import { SidebarModule } from '@app/core/template/sidebar/sidebar.module';
 import { PageRegionsModule } from '@app/pages/page-regions/page-regions.module';
+import { PageRegionModule } from '@app/pages/page-region/page-region.module';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { PageRegionsModule } from '@app/pages/page-regions/page-regions.module';
     MainModule,
     PageCountryModule,
     PageRegionsModule,
+    PageRegionModule,
     StoreModule.forRoot({
       'cases': casesReducer,
       'drawer': drawerReducer,
