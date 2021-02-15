@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { PageRegionsRoutingModule } from './page-regions-routing.module';
 import { PageRegionsComponent } from './page-regions.component';
+import { RegionsLinksGridComponent } from './regions-links-grid/regions-links-grid.component';
 
 
 @NgModule({
-  declarations: [PageRegionsComponent],
+  declarations: [PageRegionsComponent, RegionsLinksGridComponent],
   imports: [
     CommonModule,
     PageRegionsRoutingModule

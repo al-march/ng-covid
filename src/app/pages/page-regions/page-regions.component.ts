@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { selectRegionsCases } from '@app/store/cases/cases.selectors';
 
 @Component({
   selector: 'app-page-regions',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageRegionsComponent implements OnInit {
 
-  constructor() { }
+  public regions$ = this.store.pipe(select(selectRegionsCases))
+
+  constructor(
+    private store: Store
+  ) { }
 
   ngOnInit(): void {
   }

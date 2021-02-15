@@ -1,0 +1,9 @@
+<div class="regions">
+  <div
+    class="regions-item"
+    *ngFor="let region of regions | keyvalue"
+    [routerLink]="['/regions', region.key]"
+  >
+    <h3>{{region.key}}</h3>
+  </div>
+</div>

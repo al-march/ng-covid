@@ -1,0 +1,22 @@
+.regions {
+  padding: 30px 10px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(100px, 1fr));
+  grid-gap: 1rem;
+
+  &-item {
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    box-shadow: 0 1px 3px -1px #0000005c;
+    transition: .4s ease all;
+
+    &:hover {
+      box-shadow: 0 2px 4px 0 #0000005c;
+    }
+  }
+}
