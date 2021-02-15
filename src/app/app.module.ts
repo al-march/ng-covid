@@ -18,6 +18,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { drawerReducer } from '@app/store/drawer/drawer.reducer';
 import { SidebarModule } from '@app/core/template/sidebar/sidebar.module';
+import { PageRegionsModule } from '@app/pages/page-regions/page-regions.module';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { SidebarModule } from '@app/core/template/sidebar/sidebar.module';
     TemplateModule,
     MainModule,
     PageCountryModule,
+    PageRegionsModule,
     StoreModule.forRoot({
       'cases': casesReducer,
       'drawer': drawerReducer,
