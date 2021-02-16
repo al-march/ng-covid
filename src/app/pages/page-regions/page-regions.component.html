@@ -1,5 +1,13 @@
 <h2>Regions</h2>
 
+<apx-chart
+  [series]="chartOptions.series"
+  [chart]="chartOptions.chart"
+  [xaxis]="chartOptions.xaxis"
+  [title]="chartOptions.title"
+></apx-chart>
+
 <app-regions-links-grid
   [regions]="regions$ | async">
 </app-regions-links-grid>
+
