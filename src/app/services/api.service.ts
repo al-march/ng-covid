@@ -6,6 +6,7 @@ import { Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { tap } from 'rxjs/operators';
 import { retrievedCasesList } from '@app/store/cases/cases.actions';
+import { ICountryHistory } from '@app/models/history/country';
 
 @Injectable({
   providedIn: 'root'
@@ -45,5 +46,9 @@ export class ApiService {
     return this.countryCases[country]
       ? of(this.countryCases[country])
       : getFromApi();
+  }
+
+  public getCountryHistory(country: string = '', status: string = '') {
+    this.http.get<ICountryHistory>(`${this.config.host}history?country=${country}&status=${status}`)
   }
 }
