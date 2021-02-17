@@ -48,7 +48,7 @@ export class ApiService {
       : getFromApi();
   }
 
-  public getCountryHistory(country: string = '', status: string = '') {
-    this.http.get<ICountryHistory>(`${this.config.host}history?country=${country}&status=${status}`)
+  public getCountryHistory(country: string = '', status: string = ''): Observable<ICountryHistory> {
+    return this.http.get<ICountryHistory>(`${this.config.host}history?country=${country}&status=${status}`)
   }
 }
