@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { finalize, map, switchMap } from 'rxjs/operators';
+import { finalize, map, switchMap, tap } from 'rxjs/operators';
 import { ICountry } from '@app/models/cases/country';
 import { ApiService } from '@app/services/api.service';
 import { select, Store } from '@ngrx/store';
@@ -45,14 +45,19 @@ export class PageCountryComponent implements OnInit {
   );
 
   public history$: Observable<ICountryHistory> = this.countryCases$.pipe(
-    switchMap(data => {
-      const country = data.All.country;
-      this.store.dispatch(actionProgress({isLoading: true}));
-      return this.api.getCountryHistory(country, 'confirmed').pipe(
-        finalize(() => this.store.dispatch(actionProgress({isLoading: false})))
-      );
-    })
+    switchMap(() => this.getHistory())
   );
+
+  private getHistory() {
+    this.store.dispatch(actionProgress({isLoading: true}));
+    return this.api.getCountryHistory(this.countryName, this.typeOfCase).pipe(
+      tap(history => {
+        this.history = history;
+        this.initChartData(history);
+      }),
+      finalize(() => this.store.dispatch(actionProgress({isLoading: false})))
+    );
+  }
 
   private cases$ = this.store.pipe(select(selectCases));
 
@@ -64,10 +69,7 @@ export class PageCountryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.history$.subscribe(history => {
-      this.history = history;
-      this.initChartData(history);
-    });
+    this.history$.subscribe();
   }
 
   public initChartData(history: ICountryHistory): void {
@@ -130,6 +132,6 @@ export class PageCountryComponent implements OnInit {
 
   public onSelected($event: CaseType) {
     this.typeOfCase = $event;
-    this.initChartData(this.history);
+    this.getHistory().subscribe();
   }
 }
