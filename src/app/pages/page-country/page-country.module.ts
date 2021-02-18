@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { PageCountryRoutingModule } from './page-country-routing.module';
 import { PageCountryComponent } from './page-country.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
@@ -11,7 +12,9 @@ import { NgApexchartsModule } from 'ng-apexcharts';
   imports: [
     CommonModule,
     PageCountryRoutingModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    MatListModule,
   ]
 })
-export class PageCountryModule { }
+export class PageCountryModule {
+}

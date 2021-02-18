@@ -16,6 +16,8 @@ import { ApexAxisChartSeries, ApexChart, ApexDataLabels, ApexFill, ApexMarkers, 
 })
 export class PageCountryComponent implements OnInit {
 
+  public typeOfCase = 'Confirmed'
+
   public series: ApexAxisChartSeries;
   public chart: ApexChart;
   public dataLabels: ApexDataLabels;
@@ -56,13 +58,13 @@ export class PageCountryComponent implements OnInit {
 
   ngOnInit(): void {
     this.history$.subscribe(history => {
-      this.initChartData(history)
+      this.initChartData(history);
     });
   }
 
   public initChartData(history: ICountryHistory): void {
     const dates: [number, number][] = Object.entries(history.All.dates).map(([date, value]) => {
-      return [+ new Date(date), value]
+      return [+new Date(date), value];
     });
 
     this.series = [
@@ -90,10 +92,11 @@ export class PageCountryComponent implements OnInit {
     this.markers = {
       size: 0
     };
+
     this.title = {
-      text: 'Stock Price Movement',
-      align: 'left'
+      text: 'Confirmed'
     };
+
     this.fill = {
       type: 'gradient',
       gradient: {
@@ -113,7 +116,7 @@ export class PageCountryComponent implements OnInit {
       type: 'datetime'
     };
     this.tooltip = {
-      shared: false,
+      shared: false
     };
   }
 }
