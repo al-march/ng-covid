@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, switchMap } from 'rxjs/operators';
+import { finalize, map, switchMap } from 'rxjs/operators';
 import { ICountry } from '@app/models/cases/country';
 import { ApiService } from '@app/services/api.service';
 import { select, Store } from '@ngrx/store';
@@ -8,6 +8,7 @@ import { selectCases } from '@app/store/cases/cases.selectors';
 import { Observable } from 'rxjs';
 import { ICountryHistory } from '@app/models/history/country';
 import { ApexAxisChartSeries, ApexChart, ApexDataLabels, ApexFill, ApexMarkers, ApexTitleSubtitle, ApexTooltip, ApexXAxis, ApexYAxis } from 'ng-apexcharts';
+import { actionProgress } from '@app/store/progress/progress.actions';
 
 export type CaseType = 'confirmed' | 'recovered' | 'deaths';
 
@@ -46,7 +47,10 @@ export class PageCountryComponent implements OnInit {
   public history$: Observable<ICountryHistory> = this.countryCases$.pipe(
     switchMap(data => {
       const country = data.All.country;
-      return this.api.getCountryHistory(country, 'confirmed');
+      this.store.dispatch(actionProgress({isLoading: true}));
+      return this.api.getCountryHistory(country, 'confirmed').pipe(
+        finalize(() => this.store.dispatch(actionProgress({isLoading: false})))
+      );
     })
   );
 
