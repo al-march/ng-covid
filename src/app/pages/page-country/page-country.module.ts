@@ -5,6 +5,7 @@ import { PageCountryRoutingModule } from './page-country-routing.module';
 import { PageCountryComponent } from './page-country.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { MatListModule } from '@angular/material/list';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { MatListModule } from '@angular/material/list';
     PageCountryRoutingModule,
     NgApexchartsModule,
     MatListModule,
+    FormsModule
   ]
 })
 export class PageCountryModule {

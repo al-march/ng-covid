@@ -8,6 +8,7 @@ import { selectCases } from '@app/store/cases/cases.selectors';
 import { Observable } from 'rxjs';
 import { ICountryHistory } from '@app/models/history/country';
 import { ApexAxisChartSeries, ApexChart, ApexDataLabels, ApexFill, ApexMarkers, ApexTitleSubtitle, ApexTooltip, ApexXAxis, ApexYAxis } from 'ng-apexcharts';
+import { MatSelectionListChange } from '@angular/material/list';
 
 @Component({
   selector: 'app-page-country',
@@ -16,7 +17,8 @@ import { ApexAxisChartSeries, ApexChart, ApexDataLabels, ApexFill, ApexMarkers, 
 })
 export class PageCountryComponent implements OnInit {
 
-  public typeOfCase = 'Confirmed'
+  public typeOfCase = 'confirmed';
+  public history: ICountryHistory;
 
   public series: ApexAxisChartSeries;
   public chart: ApexChart;
@@ -58,6 +60,7 @@ export class PageCountryComponent implements OnInit {
 
   ngOnInit(): void {
     this.history$.subscribe(history => {
+      this.history = history;
       this.initChartData(history);
     });
   }
@@ -94,7 +97,7 @@ export class PageCountryComponent implements OnInit {
     };
 
     this.title = {
-      text: 'Confirmed'
+      text: this.typeOfCase.toUpperCase()
     };
 
     this.fill = {
@@ -118,5 +121,10 @@ export class PageCountryComponent implements OnInit {
     this.tooltip = {
       shared: false
     };
+  }
+
+  public onSelected($event: MatSelectionListChange) {
+    this.typeOfCase = $event.options[0].value;
+    this.initChartData(this.history);
   }
 }

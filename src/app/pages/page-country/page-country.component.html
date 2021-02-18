@@ -3,20 +3,20 @@
   <h3>population: {{cases.All.population | number}}</h3>
 
   <div class="country-wrapper">
-    <mat-selection-list [multiple]="false" class="list">
-      <mat-list-option class="list-item" selected>
+    <mat-selection-list [multiple]="false" class="list" (selectionChange)="onSelected($event)">
+      <mat-list-option class="list-item" [selected]="typeOfCase === 'confirmed'" [value]="'confirmed'">
         <div class="list-content">
           <span>confirmed:</span>
           <span>{{cases.All.confirmed | number}}</span>
         </div>
       </mat-list-option>
-      <mat-list-option class="list-item">
+      <mat-list-option class="list-item" [selected]="typeOfCase === 'recovered'" [value]="'recovered'">
         <div class="list-content">
           <span>recovered:</span>
           <span>{{cases.All.recovered | number}}</span>
         </div>
       </mat-list-option>
-      <mat-list-option class="list-item">
+      <mat-list-option class="list-item" [selected]="typeOfCase === 'deaths'" [value]="'deaths'">
         <div class="list-content">
           <span>deaths:</span>
           <span>{{cases.All.deaths | number}}</span>
