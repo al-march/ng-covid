@@ -3,26 +3,14 @@
   <h3>population: {{cases.All.population | number}}</h3>
 
   <div class="country-wrapper">
-    <mat-selection-list [multiple]="false" class="list" (selectionChange)="onSelected($event)">
-      <mat-list-option class="list-item" [selected]="typeOfCase === 'confirmed'" [value]="'confirmed'">
-        <div class="list-content">
-          <span>confirmed:</span>
-          <span>{{cases.All.confirmed | number}}</span>
-        </div>
-      </mat-list-option>
-      <mat-list-option class="list-item" [selected]="typeOfCase === 'recovered'" [value]="'recovered'">
-        <div class="list-content">
-          <span>recovered:</span>
-          <span>{{cases.All.recovered | number}}</span>
-        </div>
-      </mat-list-option>
-      <mat-list-option class="list-item" [selected]="typeOfCase === 'deaths'" [value]="'deaths'">
-        <div class="list-content">
-          <span>deaths:</span>
-          <span>{{cases.All.deaths | number}}</span>
-        </div>
-      </mat-list-option>
-    </mat-selection-list>
+
+    <app-page-country-list
+      [typeOfCase]="typeOfCase"
+      [confirmed]="cases.All.confirmed"
+      [deaths]="cases.All.deaths"
+      [recovered]="cases.All.recovered"
+      (onSelectionChange)="onSelected($event)">
+    </app-page-country-list>
 
     <apx-chart
       *ngIf="series"
@@ -37,6 +25,7 @@
       [tooltip]="tooltip"
       [autoUpdateSeries]="true">
     </apx-chart>
+
   </div>
 
 </div>

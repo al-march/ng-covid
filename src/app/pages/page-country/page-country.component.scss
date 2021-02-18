@@ -6,23 +6,3 @@
     grid-gap: 40px;
   }
 }
-
-.list {
-
-  outline: none;
-
-  &-item {
-    border-bottom: 1px solid #dedede;
-  }
-
-  &-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-
-    span:first-child {
-      text-transform: capitalize;
-    }
-  }
-}

@@ -8,7 +8,8 @@ import { selectCases } from '@app/store/cases/cases.selectors';
 import { Observable } from 'rxjs';
 import { ICountryHistory } from '@app/models/history/country';
 import { ApexAxisChartSeries, ApexChart, ApexDataLabels, ApexFill, ApexMarkers, ApexTitleSubtitle, ApexTooltip, ApexXAxis, ApexYAxis } from 'ng-apexcharts';
-import { MatSelectionListChange } from '@angular/material/list';
+
+export type CaseType = 'confirmed' | 'recovered' | 'deaths';
 
 @Component({
   selector: 'app-page-country',
@@ -17,7 +18,7 @@ import { MatSelectionListChange } from '@angular/material/list';
 })
 export class PageCountryComponent implements OnInit {
 
-  public typeOfCase = 'confirmed';
+  public typeOfCase: CaseType = 'confirmed';
   public history: ICountryHistory;
 
   public series: ApexAxisChartSeries;
@@ -123,8 +124,8 @@ export class PageCountryComponent implements OnInit {
     };
   }
 
-  public onSelected($event: MatSelectionListChange) {
-    this.typeOfCase = $event.options[0].value;
+  public onSelected($event: CaseType) {
+    this.typeOfCase = $event;
     this.initChartData(this.history);
   }
 }

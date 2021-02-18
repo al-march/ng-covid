@@ -6,10 +6,11 @@ import { PageCountryComponent } from './page-country.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { MatListModule } from '@angular/material/list';
 import { FormsModule } from '@angular/forms';
+import { PageCountryListComponent } from './page-country-list/page-country-list.component';
 
 
 @NgModule({
-  declarations: [PageCountryComponent],
+  declarations: [PageCountryComponent, PageCountryListComponent],
   imports: [
     CommonModule,
     PageCountryRoutingModule,
