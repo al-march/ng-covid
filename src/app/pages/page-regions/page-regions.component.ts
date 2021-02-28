@@ -1,7 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { selectRegionsCases } from '@app/store/cases/cases.selectors';
 import { ChartComponent } from 'ng-apexcharts';
+import { IRegionsCases } from '@app/store/cases/cases.state';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -9,12 +12,14 @@ import { ChartComponent } from 'ng-apexcharts';
   templateUrl: './page-regions.component.html',
   styleUrls: ['./page-regions.component.scss']
 })
-export class PageRegionsComponent implements OnInit {
+export class PageRegionsComponent implements OnInit, OnDestroy {
 
   public regions$ = this.store.pipe(select(selectRegionsCases));
 
   @ViewChild('chart') chart: ChartComponent;
   public chartOptions: Partial<ChartComponent>;
+
+  private destroy$ = new Subject();
 
   constructor(
     private store: Store
@@ -22,20 +27,29 @@ export class PageRegionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.regions$.subscribe(cases => {
-      const data: number[] = [];
-      const categories: string[] = [];
-
-      cases.forEach((region, name) => {
-        data.push(region.recovered);
-        categories.push(name);
-      });
-
-      this.createGraph(data, categories);
-    });
+    this.regions$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(cases => this.initGraph(cases));
   }
 
-  createGraph(data: number[] = [], categories: string[] = []) {
+  private initGraph(cases: IRegionsCases): void {
+    const {data, categories} = this.parseData(cases);
+    this.createGraph(data, categories);
+  }
+
+  private parseData(cases: IRegionsCases): { data: number[], categories: string[] } {
+    const data: number[] = [];
+    const categories: string[] = [];
+
+    cases.forEach((region, name) => {
+      data.push(region.recovered);
+      categories.push(name);
+    });
+
+    return {data, categories};
+  }
+
+  private createGraph(data: number[] = [], categories: string[] = []): void {
     this.chartOptions = {
       series: [{
         name: 'Recovered',
@@ -49,6 +63,11 @@ export class PageRegionsComponent implements OnInit {
         categories
       }
     };
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 }
