@@ -5,4 +5,21 @@
     <mat-icon>menu</mat-icon>
   </button>
 
+  <div class="search">
+    <mat-form-field class="search-field">
+      <mat-label>Search country</mat-label>
+      <input type="text"
+             placeholder="Ex. Germany"
+             aria-label="Country"
+             matInput
+             [formControl]="control"
+             [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+
 </mat-toolbar>
