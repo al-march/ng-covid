@@ -41,7 +41,6 @@ export class PageRegionsComponent implements OnInit, OnDestroy {
     this.createGraph(data, categories);
   }
 
-
   private parseData(cases: IRegionsCases): GraphData {
     const data: number[] = [];
     const categories: string[] = [];
