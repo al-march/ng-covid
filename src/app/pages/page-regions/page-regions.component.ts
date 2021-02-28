@@ -6,6 +6,10 @@ import { IRegionsCases } from '@app/store/cases/cases.state';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
+interface GraphData {
+  data: number[];
+  categories: string[];
+}
 
 @Component({
   selector: 'app-page-regions',
@@ -37,7 +41,7 @@ export class PageRegionsComponent implements OnInit, OnDestroy {
     this.createGraph(data, categories);
   }
 
-  private parseData(cases: IRegionsCases): { data: number[], categories: string[] } {
+  private parseData(cases: IRegionsCases): GraphData {
     const data: number[] = [];
     const categories: string[] = [];
 
@@ -49,7 +53,7 @@ export class PageRegionsComponent implements OnInit, OnDestroy {
     return {data, categories};
   }
 
-  private createGraph(data: number[] = [], categories: string[] = []): void {
+  private createGraph(data: number[], categories: string[]): void {
     this.chartOptions = {
       series: [{
         name: 'Recovered',
