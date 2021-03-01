@@ -5,6 +5,8 @@ import { map, startWith, switchMap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import { selectCases } from '@app/store/cases/cases.selectors';
 import { ICases } from '@app/models/cases/country';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -22,7 +24,8 @@ export class HeaderComponent implements OnInit {
   cases$ = this.store.pipe(select(selectCases));
 
   constructor(
-    private store: Store
+    private store: Store,
+    private router: Router
   ) {
   }
 
@@ -38,5 +41,18 @@ export class HeaderComponent implements OnInit {
         )
       )
     );
+  }
+
+  async goToCountry($event: MatAutocompleteSelectedEvent): Promise<void> {
+    const selectedCountry = $event.option.value;
+    const route = await this.router.navigate(['/', 'country'], {
+      queryParams: {
+        name: selectedCountry
+      }
+    });
+
+    if (route) {
+      this.control.setValue('');
+    }
   }
 }

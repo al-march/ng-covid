@@ -14,7 +14,7 @@
              matInput
              [formControl]="control"
              [matAutocomplete]="auto">
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="goToCountry($event)">
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
           {{option}} | {{cases[option].All.confirmed | number}}
         </mat-option>
