@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map, startWith, switchMap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import { selectCases } from '@app/store/cases/cases.selectors';
-import { getStoreValue } from '@app/store/store.helpers';
 import { ICases } from '@app/models/cases/country';
 
 @Component({
@@ -28,10 +27,15 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const filterCases = (cases: ICases, searchValue: string) => (
+      Object.keys(cases).filter(item => item.toLowerCase().includes(searchValue.toLowerCase()))
+    );
+
     this.filteredOptions = this.control.valueChanges.pipe(
       startWith(''),
-      switchMap((value) => this.cases$.pipe(
-        map(cases => Object.keys(cases).filter(item => item.includes(value))))
+      switchMap((value) => (
+          this.cases$.pipe(map(cases => filterCases(cases, value)))
+        )
       )
     );
   }
