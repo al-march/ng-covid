@@ -7,12 +7,40 @@ const initialCasesList = {} as CasesState;
 
 export const casesReducer = createReducer(
   initialCasesList,
-  on(retrievedCasesList, (state, {casesList}) => ({
-    ...state,
-    casesList,
-    regionCases: parseCases(casesList)
-  }))
+  on(retrievedCasesList, (state, {casesList}) => {
+    const sortedCases = sortCases(casesList);
+    const parsedCases = parseCases(sortedCases);
+    return {
+      ...state,
+      casesList: sortedCases,
+      regionCases: parsedCases
+    };
+  })
 );
+
+function sortCases(cases: ICases): ICases {
+  const compare = (a: string, b: string) => {
+    if (cases[a].All.confirmed < cases[b].All.confirmed) {
+      return 1;
+    }
+    if (cases[a].All.confirmed > cases[b].All.confirmed) {
+      return -1;
+    }
+
+    return 0;
+  };
+
+  const output: ICases = {};
+
+  Object.keys(cases)
+    .sort(compare)
+    .forEach(item => {
+      console.log(cases[item]);
+      output[item] = cases[item];
+    });
+
+  return output;
+}
 
 function parseCases(cases: ICases): IRegionsCases {
   const regions: IRegionsCases = new Map<string, IRegionCase>();
