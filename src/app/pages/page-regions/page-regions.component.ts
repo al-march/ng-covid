@@ -46,7 +46,7 @@ export class PageRegionsComponent implements OnInit, OnDestroy {
     const categories: string[] = [];
 
     cases.forEach((region, name) => {
-      data.push(region.recovered);
+      data.push(region.confirmed);
       categories.push(name);
     });
 
@@ -56,7 +56,7 @@ export class PageRegionsComponent implements OnInit, OnDestroy {
   private createGraph(data: number[], categories: string[]): void {
     this.chartOptions = {
       series: [{
-        name: 'Recovered',
+        name: 'Confirmed',
         data
       }],
       chart: {
