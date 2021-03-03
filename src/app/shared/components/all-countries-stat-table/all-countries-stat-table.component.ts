@@ -14,7 +14,7 @@ export class AllCountriesStatTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  @Input() pagination: number[] = [10, 15, 25, 100];
+  @Input() pagination: number[] = [15, 20, 25, 50];
   @Input() countries: ICountryStateAll[] = [];
 
   public displayedColumns: string[] = ['country', 'population', 'confirmed', 'deaths', 'actions'];
