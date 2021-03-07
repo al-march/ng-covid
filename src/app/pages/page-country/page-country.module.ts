@@ -4,19 +4,17 @@ import { CommonModule } from '@angular/common';
 import { PageCountryRoutingModule } from './page-country-routing.module';
 import { PageCountryComponent } from './page-country.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { MatListModule } from '@angular/material/list';
-import { FormsModule } from '@angular/forms';
 import { PageCountryListComponent } from './page-country-list/page-country-list.component';
+import { MaterialModule } from '@app/shared/material/material/material.module';
 
 
 @NgModule({
   declarations: [PageCountryComponent, PageCountryListComponent],
   imports: [
     CommonModule,
+    MaterialModule,
     PageCountryRoutingModule,
     NgApexchartsModule,
-    MatListModule,
-    FormsModule
   ]
 })
 export class PageCountryModule {

@@ -14,12 +14,11 @@ import { ApiService } from '@app/services/api.service';
 import { StoreModule } from '@ngrx/store';
 import { progressReducer } from '@app/store/progress/progress.reducer';
 import { casesReducer } from '@app/store/cases/cases.reducer';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { drawerReducer } from '@app/store/drawer/drawer.reducer';
 import { SidebarModule } from '@app/core/template/sidebar/sidebar.module';
 import { PageRegionsModule } from '@app/pages/page-regions/page-regions.module';
 import { PageRegionModule } from '@app/pages/page-region/page-region.module';
+import { MaterialModule } from '@app/shared/material/material/material.module';
 
 
 @NgModule({
@@ -33,19 +32,20 @@ import { PageRegionModule } from '@app/pages/page-region/page-region.module';
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MaterialModule,
     TemplateModule,
+    SidebarModule,
     MainModule,
+
     PageCountryModule,
     PageRegionsModule,
     PageRegionModule,
+
     StoreModule.forRoot({
       'cases': casesReducer,
       'drawer': drawerReducer,
       isLoading: progressReducer
     }),
-    MatProgressBarModule,
-    MatSidenavModule,
-    SidebarModule
   ],
   providers: [
     {
